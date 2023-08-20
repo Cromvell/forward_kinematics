@@ -9,16 +9,8 @@
 #include <QFormLayout>
 #include <cmath>
 
-#include "matrix.h"
-
-struct DH_Parameters {
-    float cos_theta;
-    float sin_theta;
-    float cos_alpha;
-    float sin_alpha;
-    float a;
-    float d;
-};
+#include "geometry.h"
+#include "robot.h"
 
 class MainWindow : public QMainWindow
 {
@@ -32,12 +24,10 @@ private slots:
     void calculateForwardKinematics();
 
 private:
-    DH_Parameters dh_parameters[6];
-    QLineEdit *angleInputs[6];
-    QLabel *resultLabel;
+    DH_Robot *robot;
 
-    Vector3f ForwardKinematics(const DH_Parameters dh_parameters[]);
-    Matrix4f make_dh_matrix(DH_Parameters p);
+    QLineEdit *angleInputs[DH_Robot::JOINT_COUNT];
+    QLabel *resultLabel;
 };
 
 #endif // MAINWINDOW_H

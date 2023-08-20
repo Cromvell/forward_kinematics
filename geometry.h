@@ -1,10 +1,16 @@
-#ifndef MATRIX_H
-#define MATRIX_H
+#ifndef GEOMETRY_H
+#define GEOMETRY_H
+#include <cstring>
+#include <cassert>
+#include <cmath>
+
 #include <initializer_list>
 #include <iterator>
-#include <cstring>
+
 #include <QDebug>
-#include <cassert>
+#include <iostream>
+
+#define RAD(d) ((d) / 180. * M_PI)
 
 
 template <typename T>
@@ -68,7 +74,7 @@ struct Vector4 {
 };
 
 template<class T>
-struct Matrix4 final {
+struct Matrix4 {
     T _data[4][4];
     static const size_t ROWS = 4;
     static const size_t COLS = 4;
@@ -128,11 +134,12 @@ struct Matrix4 final {
     }
 
     static Matrix4<T> eye() {
-        Matrix4<T> m{{1.0, 0.0, 0.0, 0.0},
-                     {0.0, 1.0, 0.0, 0.0},
-                     {0.0, 0.0, 1.0, 0.0},
-                     {0.0, 0.0, 0.0, 1.0}};
-        return m;
+        return Matrix4<T>{
+            {1.0, 0.0, 0.0, 0.0},
+            {0.0, 1.0, 0.0, 0.0},
+            {0.0, 0.0, 1.0, 0.0},
+            {0.0, 0.0, 0.0, 1.0}
+        };
     }
 };
 
@@ -186,4 +193,4 @@ QDebug operator<<(QDebug d, Vector3<t>& v) {
     return d;
 }
 
-#endif // MATRIX_H
+#endif // GEOMETRY_H
